@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Fineao API",
+    "description": "A Simple Store Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Products",
+      "description": "API for products in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/product": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Create new product in system",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "Product that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New product is created",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get all products in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      }
+    },
+    "/products/{productId}": {
+      "parameters": [
+        {
+          "name": "productId",
+          "in": "path",
+          "required": true,
+          "description": "ID of product that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get product with given ID",
+        "responses": {
+          "200": {
+            "description": "Products is found",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete products with given ID",
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "Products is deleted",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update product with give ID",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "Product with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product is updated",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "required": [
+        "email",
+        "_id"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        }
+      }
+    },
+    "Products": {
+      "type": "array",
+      "$ref": "#/definitions/Product"
+    }
+  }
+}
