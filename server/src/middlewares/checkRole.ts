@@ -16,7 +16,7 @@ export const checkRole = (roles: string[]) => {
     } catch (id) {
       res.status(401).send();
     }
-
+    console.log("Server started on port 3000!");
     // Check if array of authorized roles includes the user's role
     if (roles.indexOf(user.role) > -1) { next(); } else { res.status(401).send(); }
   };
